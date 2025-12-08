@@ -28,6 +28,13 @@
                 {
                   # https://devenv.sh/reference/options/
 
+                  git-hooks = {
+                    enable = true;
+                    hooks = {
+                      nixpkgs-fmt.enable = true;
+                      dune-fmt.enable = true;
+                    };
+                  };
                   languages.ocaml = {
                     enable = true;
                     packages = pkgs.ocaml-ng.ocamlPackages_5_4;
