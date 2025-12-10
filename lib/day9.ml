@@ -4,7 +4,6 @@ type box = { b_a : v2; b_b : v2 }
 
 let pair_of_v2 v = (v.x, v.y)
 let swap_v2 v = { x = v.y; y = v.x }
-let option_alt l r = match (l, r) with Some x, _ -> Some x | _, y -> y
 let eq_v2 l r = l.x == r.x && l.y == r.y
 
 let min_v2 v_l v_r =
