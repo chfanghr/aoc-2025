@@ -76,7 +76,7 @@ let sort_on_polar = function
       let polar { x; y } =
         Float.atan2 (Float.of_int (y - origin.y)) (Float.of_int (x - origin.x))
       in
-      let rest = List.filter (Fun.compose not (eq_v2 origin) ) ps in
+      let rest = List.filter (Fun.compose not (eq_v2 origin)) ps in
       let sort_on f =
         let comp x y = compare (f x) (f y) in
         List.sort comp
@@ -94,7 +94,7 @@ let graham_scan =
   in
   function [] -> [] | p :: ps -> go ([ p ], ps)
 
-let convex  = Fun.compose graham_scan sort_on_polar
+let convex = Fun.compose graham_scan sort_on_polar
 
 (* Rotating calipers *)
 
@@ -104,7 +104,8 @@ let convex  = Fun.compose graham_scan sort_on_polar
 
 let pt1_naive = Fun.compose (Result.map naive_biggest_box_area) parse
 
-let pt1_better = Fun.compose (Result.map (Fun.compose naive_biggest_box_area convex)) parse
+let pt1_better =
+  Fun.compose (Result.map (Fun.compose naive_biggest_box_area convex)) parse
 
 (* Inputs *)
 
