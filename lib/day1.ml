@@ -22,12 +22,30 @@ let parse =
 let solve_pt1 rots =
   let step (cur, cnt) rot =
     let cur' = (cur + rot) % 100 in
-    let cnt' = if equal cur' 0 then cnt + 1 else cnt in
+    let cnt' = if cur' = 0 then cnt + 1 else cnt in
     (cur', cnt')
   in
   List.fold_left rots ~init:(50, 0) ~f:step
 
+let solve_pt2 rots =
+  let step (cur, cnt) rot =
+    let cur' = cur + rot in
+    let cnt' =
+      cnt
+      +
+      if cur' <= 0 then (if cur = 0 then 0 else 1) + (abs cur' / 100)
+      else if cur' >= 100 then cur' / 100
+      else 0
+    in
+    let cur'' = cur' % 100 in
+    (cur'', cnt')
+  in
+  List.fold_left rots ~init:(50, 0) ~f:step
+
 let pt1 = Fn.compose (Result.map ~f:(Fn.compose snd solve_pt1)) parse
+
+let pt2 = Fn.compose (Result.map ~f:(Fn.compose snd solve_pt2)) parse
+
 let example_input = "L68\nL30\nR48\nL5\nR60\nL55\nL1\nL99\nR14\nL82"
 
 let input =
